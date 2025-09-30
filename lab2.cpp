@@ -9,7 +9,8 @@ struct User {
     vector<string> permissions;
     User* next;
 
-    User(const string& u, const string& p, const vector<string>& perms = {"view"}) {
+    User(const string& u, const string& p, const vector<string>& perms = {"view"}) 
+    {
         username = u;
         password = p;
         permissions = perms;
@@ -17,7 +18,8 @@ struct User {
     }
 };
 
-bool insertUser(User*& head, const string& username, const string& password, const vector<string>& perms = {"view"}) {
+bool insertUser(User*& head, const string& username, const string& password, const vector<string>& perms = {"view"}) 
+{
     if (!head) {
         head = new User(username, password, perms);
         return true;
