@@ -6,7 +6,7 @@ using namespace std;
 struct User {
     string username;
     string password;
-    vector<string> permissions; 
+    vector<string> permissions;
     User* next;
 
     User(const string& u, const string& p, const vector<string>& perms = {"view"}) {
@@ -17,7 +17,6 @@ struct User {
     }
 };
 
-// Updated insertUser to accept permissions
 bool insertUser(User*& head, const string& username, const string& password, const vector<string>& perms = {"view"}) {
     if (!head) {
         head = new User(username, password, perms);
@@ -97,14 +96,16 @@ void printUsers(User* head) {
     cout << "NULL" << endl;
 }
 
-
-bool authorize(User* head, const string& username, const string& action) {
+// ✅ Step 5: updated authorize function
+bool authorize(User* head, const string& username, const string& action) 
+{
     User* u = findUser(head, username);
-    if (!u) return false;
+    if (!u) return false;        
+
     for (const string& perm : u->permissions) {
-        if (perm == action) return true;
+        if (perm == action) return true;  
     }
-    return false;
+    return false;                 
 }
 
 int main() {
@@ -113,22 +114,22 @@ int main() {
     // Insert users with permissions
     insertUser(head, "alice", "123", {"view", "edit", "create"});
     insertUser(head, "bob", "456", {"view", "edit"});
-    insertUser(head, "charlie", "789");      
-    insertUser(head, "dave", "000", {"view"}); 
+    insertUser(head, "charlie", "789"); // defaults to {"view"}
+    insertUser(head, "dave", "000", {"view"});
 
     printUsers(head);
     cout << "Size: " << size(head) << endl;
 
-
+    // Authenticate
     cout << "Authenticate bob/456: " << authenticate(head, "bob", "456") << endl;
     cout << "Authenticate alice/999: " << authenticate(head, "alice", "999") << endl;
 
-
-    cout << "Alice can create: " << authorize(head, "alice", "create") << endl;
-    cout << "Bob can create: " << authorize(head, "bob", "create") << endl;
-    cout << "Charlie can edit: " << authorize(head, "charlie", "edit") << endl;
-    cout << "Dave can view: " << authorize(head, "dave", "view") << endl;
-    cout << "Unknown user can view: " << authorize(head, "eve", "view") << endl;
+    // Authorize
+    cout << "Alice can create: " << authorize(head, "alice", "create") << endl;   
+    cout << "Bob can create: " << authorize(head, "bob", "create") << endl;      
+    cout << "Charlie can edit: " << authorize(head, "charlie", "edit") << endl;   
+    cout << "Dave can view: " << authorize(head, "dave", "view") << endl;         
+    cout << "Unknown user can view: " << authorize(head, "eve", "view") << endl;  
 
     // Remove users
     removeByUsername(head, "bob");
