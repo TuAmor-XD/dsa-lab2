@@ -8,7 +8,8 @@ struct User {
     string role;    
     User* next;
 
-    User(string u, string p, string r = "viewer") {
+    User(string u, string p, string r = "viewer") 
+    {
         username = u;
         password = p;
         role = r;
@@ -16,7 +17,8 @@ struct User {
     }
 };
 
-bool insertUser(User*& head, const string& username, const string& password, const string& role = "viewer") {
+bool insertUser(User*& head, const string& username, const string& password, const string& role = "viewer") 
+{
     if (!head) {
         head = new User(username, password, role);
         return true;
@@ -31,7 +33,8 @@ bool insertUser(User*& head, const string& username, const string& password, con
     return true;
 }
 
-User* findUser(User* head, const string& username) {
+User* findUser(User* head, const string& username) 
+{
     User* curr = head;
     while (curr) {
         if (curr->username == username) return curr;
@@ -40,7 +43,8 @@ User* findUser(User* head, const string& username) {
     return nullptr;
 }
 
-bool authenticate(User* head, const string& username, const string& password) {
+bool authenticate(User* head, const string& username, const string& password) 
+{
     User* u = findUser(head, username);
     return (u && u->password == password);
 }
