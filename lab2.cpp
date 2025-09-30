@@ -8,8 +8,8 @@ struct User {
     string role;    
     User* next;
 
-    User(string u, string p, string r = "viewer") 
-    {
+     User(string u, string p, string r = "viewer") 
+     { 
         username = u;
         password = p;
         role = r;
@@ -17,8 +17,7 @@ struct User {
     }
 };
 
-bool insertUser(User*& head, const string& username, const string& password, const string& role = "viewer") 
-{
+bool insertUser(User*& head, const string& username, const string& password, const string& role = "viewer") {
     if (!head) {
         head = new User(username, password, role);
         return true;
@@ -106,14 +105,14 @@ int main() {
 
     insertUser(head, "alice", "123", "admin");
     insertUser(head, "bob", "456", "editor");
-    insertUser(head, "charlie", "789"); 
+    insertUser(head, "charlie", "789");
 
-    printUsers(head);
+    printUsers(head); 
 
     cout << "Size: " << size(head) << endl;
 
     removeByUsername(head, "bob");
-    printUsers(head);
+    printUsers(head); 
 
     clearList(head);
     printUsers(head);
