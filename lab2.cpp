@@ -116,14 +116,26 @@ int main() {
 
     insertUser(head, "alice", "123", "admin");
     insertUser(head, "bob", "456", "editor");
-    insertUser(head, "charlie", "789");
+    insertUser(head, "charlie", "789"); 
+    insertUser(head, "dave", "000");   
 
-    printUsers(head); 
-
+    printUsers(head);
     cout << "Size: " << size(head) << endl;
 
+    cout << "Authenticate bob/456: " << authenticate(head, "bob", "456") << endl;
+    cout << "Authenticate alice/999: " << authenticate(head, "alice", "999") << endl;
+
+    cout << "Alice can create: " << authorize(head, "alice", "create") << endl;
+    cout << "Bob can create: " << authorize(head, "bob", "create") << endl;
+    cout << "Charlie can edit: " << authorize(head, "charlie", "edit") << endl;
+    cout << "Dave can view: " << authorize(head, "dave", "view") << endl;
+    cout << "Unknown user can view: " << authorize(head, "eve", "view") << endl;
+
     removeByUsername(head, "bob");
-    printUsers(head); 
+    printUsers(head);
+
+    removeFront(head);
+    printUsers(head);
 
     clearList(head);
     printUsers(head);
