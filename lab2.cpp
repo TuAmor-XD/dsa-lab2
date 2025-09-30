@@ -100,6 +100,17 @@ void printUsers(User* head) {
     cout << "NULL" << endl;
 }
 
+bool authorize(User* head, const string& username, const string& action) 
+{
+    User* u = findUser(head, username);
+    if (!u) return false;
+    if (u->role == "admin") return true;
+    if (u->role == "editor" && (action == "edit" || action == "view")) return true;
+    if (u->role == "viewer" && action == "view") return true;
+
+    return false;
+}
+
 int main() {
     User* head = nullptr;
 
